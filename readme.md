@@ -49,5 +49,12 @@
 
 
 
+# Criando modelo orm
+
+    -> api.models -> definir estrutura
+    python manage.py makemigrations
+    python manage.py migrate
+
+
 
 
