@@ -35,6 +35,11 @@
 ![Alt text](img/image-1.png)
 
 
+# migrando dados
+
+    python manage.py migrate
+
+
 
 
 
