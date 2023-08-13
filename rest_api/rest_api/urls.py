@@ -1,8 +1,15 @@
 from django.contrib import admin
 from django.urls import path, include
 from ninja import NinjaAPI
+from ninja.security import HttpBearer
 
-api = NinjaAPI()
+class GlobalAuth(HttpBearer):
+    def authenticate(self, request, token):
+        if token == "supersecret":
+            return token
+
+api = NinjaAPI(auth=GlobalAuth())
+
 @api.get('livro/')
 def livro(request):
     return {'msg': 'Livros'}
