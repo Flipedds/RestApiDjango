@@ -10,7 +10,7 @@ class GlobalAuth(HttpBearer):
         if token == "supersecret":
             return token
 
-api = NinjaAPI(auth=GlobalAuth())
+api = NinjaAPI(auth=GlobalAuth(), title="RestApi", description="A rest api with django-ninja")
 
 @api.get('livro/')
 def livro(request):
