@@ -40,6 +40,14 @@
     python manage.py migrate
 
 
+# Sites para estudo
+
+    https://www.alura.com.br/artigos/django-query-sets-e-orm
+    https://django-ninja.rest-framework.com/guides/input/path-params/
+    https://docs.djangoproject.com/en/4.2/topics/db/models/
+    https://docs.djangoproject.com/en/4.2/topics/db/queries/
+
+
 
 
 
