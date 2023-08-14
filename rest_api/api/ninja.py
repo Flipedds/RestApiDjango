@@ -31,7 +31,7 @@ api = NinjaAPI(auth=GlobalAuth(), title="RestApi", description="A rest api with 
 
 @api.exception_handler(InvalidToken)
 def on_invalid_token(request, exc):
-    return api.create_response(request, {"detail": "Token inválido"}, status=401)
+    return api.create_response(request, {"detail": "Token inválido ou expirado"}, status=401)
 
 
 @api.get('auth', auth=None)
