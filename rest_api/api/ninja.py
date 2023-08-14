@@ -3,6 +3,8 @@ from django.core import serializers
 from ninja.security import HttpBearer
 from api.models import Livro
 from api.schemas import LivroSchema
+import jwt
+from datetime import datetime, timedelta
 
 
 class GlobalAuth(HttpBearer):
@@ -11,6 +13,13 @@ class GlobalAuth(HttpBearer):
             return token
 
 api = NinjaAPI(auth=GlobalAuth(), title="RestApi", description="A rest api with django-ninja")
+
+@api.get('auth', auth=None)
+def Jwt(request):
+    token = jwt.encode({
+        'exp': datetime.utcnow() + timedelta(minutes=2)
+    }, key='1234', algorithm="HS256")
+    return {"token": token}
 
 @api.get('livro/')
 def livro(request):
