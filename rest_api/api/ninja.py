@@ -4,15 +4,25 @@ from ninja.security import HttpBearer
 from api.models import Livro
 from api.schemas import LivroSchema
 import jwt
-from datetime import datetime, timedelta
-
+from datetime import datetime, timedelta, timezone
 
 class GlobalAuth(HttpBearer):
     def authenticate(self, request, token):
-        if token == "supersecret":
+        payload = jwt.decode(token, '1234', algorithms=['HS256'])
+        expiration = payload['exp']
+        current_time = datetime.now(timezone.utc).timestamp()
+        if expiration > current_time:
             return token
 
+class InvalidToken(Exception):
+    pass
+
 api = NinjaAPI(auth=GlobalAuth(), title="RestApi", description="A rest api with django-ninja")
+
+@api.exception_handler(InvalidToken)
+def on_invalid_token(request, exc):
+    return api.create_response(request, {"detail": "Token inválido"}, status=401)
+
 
 @api.get('auth', auth=None)
 def Jwt(request):
