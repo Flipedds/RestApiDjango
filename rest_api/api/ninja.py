@@ -8,11 +8,21 @@ from datetime import datetime, timedelta, timezone
 
 class GlobalAuth(HttpBearer):
     def authenticate(self, request, token):
-        payload = jwt.decode(token, '1234', algorithms=['HS256'])
-        expiration = payload['exp']
-        current_time = datetime.now(timezone.utc).timestamp()
-        if expiration > current_time:
-            return token
+        try:
+            payload = jwt.decode(token, '1234', algorithms=['HS256'])
+            expiration = payload['exp']
+            current_time = datetime.now(timezone.utc).timestamp()
+
+            if expiration > current_time:
+                return token
+            else:
+                print("Token antigo.")
+                return None
+            
+        except jwt.ExpiredSignatureError:
+            raise InvalidToken
+        except jwt.DecodeError:
+            raise InvalidToken
 
 class InvalidToken(Exception):
     pass
