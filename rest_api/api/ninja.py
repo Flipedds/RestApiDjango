@@ -3,7 +3,7 @@ from api.controllers import Controllers
 from api.api_settings import api
 from typing import List
 
-@api.get('auth', auth=None)
+@api.get('auth/', auth=None)
 def Jwt(request):
     token = Controllers.create_token_jwt()
     return {"token": token}
