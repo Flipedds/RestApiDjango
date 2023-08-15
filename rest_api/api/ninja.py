@@ -1,16 +1,17 @@
 from api.schemas import LivroSchema
 from api.controllers import Controllers
 from api.api_settings import api
+from typing import List
 
 @api.get('auth', auth=None)
 def Jwt(request):
     token = Controllers.create_token_jwt()
     return {"token": token}
 
-@api.get('livro/')
+@api.get('livros/', response=List[LivroSchema])
 def livro(request):
     json_data = Controllers.get_all_books()
-    return {"livros": json_data}
+    return json_data
 
 @api.post('/livro/create', response=LivroSchema)
 def create_livro(request, livro: LivroSchema):

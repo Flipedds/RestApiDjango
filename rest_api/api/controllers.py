@@ -1,7 +1,6 @@
 from datetime import datetime, timedelta
 import jwt
 from api.models import Livro
-from django.core import serializers
 from rest_api.settings import SECRET_KEY
 
 class Controllers:
@@ -13,8 +12,7 @@ class Controllers:
     
     def get_all_books():
         livros = Livro.objects.all()
-        json_data = serializers.serialize('json', livros)
-        return json_data
+        return livros
     
     def create_new_book(livro):
         dict = livro.dict()
