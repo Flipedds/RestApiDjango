@@ -4,7 +4,8 @@ from ninja.security import HttpBearer
 from api.models import Livro
 from api.schemas import LivroSchema
 import jwt
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timezone
+from api.controllers import Controllers
 
 class GlobalAuth(HttpBearer):
     def authenticate(self, request, token):
@@ -36,20 +37,15 @@ def on_invalid_token(request, exc):
 
 @api.get('auth', auth=None)
 def Jwt(request):
-    token = jwt.encode({
-        'exp': datetime.utcnow() + timedelta(minutes=2)
-    }, key='1234', algorithm="HS256")
+    token = Controllers.create_token_jwt()
     return {"token": token}
 
 @api.get('livro/')
 def livro(request):
-    livros = Livro.objects.all()
-    json_data = serializers.serialize('json', livros)
+    json_data = Controllers.get_all_books()
     return {"livros": json_data}
 
 @api.post('/livro/create', response=LivroSchema)
 def create_livro(request, livro: LivroSchema):
-    dict = livro.dict()
-    novo_livro = Livro(**dict)
-    novo_livro.save()
-    return livro
+    dict = Controllers.create_new_book(livro=livro)
+    return dict
