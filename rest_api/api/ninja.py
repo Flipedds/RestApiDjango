@@ -9,7 +9,7 @@ def Jwt(request):
     return {"token": token}
 
 @api.get('livros/', response=List[LivroSchema])
-def livro(request):
+def livros(request):
     json_data = Controllers.get_all_books()
     return json_data
 
