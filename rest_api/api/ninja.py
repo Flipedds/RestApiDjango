@@ -21,4 +21,4 @@ def create_livro(request, livro: LivroSchema):
 def delete_livro(request, id: int):
     result = Controllers.delete_book(id=id)
 
-    return {"msg": "deletado com sucesso!"}
+    return result

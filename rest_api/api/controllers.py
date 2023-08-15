@@ -23,5 +23,10 @@ class Controllers:
         return dict
     
     def delete_book(id):
-        book = Livro.objects.get(pk=id).delete()
-        return book
+        try:
+            book = Livro.objects.get(pk=id)
+        except Exception as err:
+            return {"msg": "Livro não encontrado / não foi possível deletar!"}
+            
+        book.delete()
+        return {"msg": "Livro deletado"}
