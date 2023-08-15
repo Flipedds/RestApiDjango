@@ -21,3 +21,7 @@ class Controllers:
         novo_livro = Livro(**dict)
         novo_livro.save()
         return dict
+    
+    def delete_book(id):
+        book = Livro.objects.get(pk=id).delete()
+        return book
