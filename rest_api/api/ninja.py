@@ -6,11 +6,12 @@ from api.schemas import LivroSchema
 import jwt
 from datetime import datetime, timezone
 from api.controllers import Controllers
+from rest_api.settings import SECRET_KEY
 
 class GlobalAuth(HttpBearer):
     def authenticate(self, request, token):
         try:
-            payload = jwt.decode(token, '1234', algorithms=['HS256'])
+            payload = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])
             expiration = payload['exp']
             current_time = datetime.now(timezone.utc).timestamp()
 

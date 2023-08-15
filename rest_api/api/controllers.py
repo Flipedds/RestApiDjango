@@ -2,12 +2,13 @@ from datetime import datetime, timedelta
 import jwt
 from api.models import Livro
 from django.core import serializers
+from rest_api.settings import SECRET_KEY
 
 class Controllers:
     def create_token_jwt():
         token = jwt.encode({
         'exp': datetime.utcnow() + timedelta(minutes=2)
-    }, key='1234', algorithm="HS256")
+    }, key=SECRET_KEY, algorithm="HS256")
         return token
     
     def get_all_books():
