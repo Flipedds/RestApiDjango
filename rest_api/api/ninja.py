@@ -13,12 +13,12 @@ def livros(request):
     json_data = Controllers.get_all_books()
     return json_data
 
-@api.post('/livro/create', response=LivroSchema)
+@api.post('/livro/create/', response=LivroSchema)
 def create_livro(request, livro: LivroSchema):
     dict = Controllers.create_new_book(livro=livro)
     return dict
 
-@api.delete('/livro/delete/{id}')
+@api.delete('/livro/delete/{id}/')
 def delete_livro(request, id: int):
     result = Controllers.delete_book(id=id)
 
