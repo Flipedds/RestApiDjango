@@ -23,3 +23,7 @@ def delete_livro(request, id: int):
     result = Controllers.delete_book(id=id)
 
     return result
+
+@api.put('/livro/update/{id}/', tags=["Put"], description="Atualiza um livro no banco de dados")
+def update_livro(request, id: int, livro: LivroSchema):
+    return {"msg": "Não implementado" }
