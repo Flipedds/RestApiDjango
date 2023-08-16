@@ -1,4 +1,4 @@
-from api.schemas import LivroSchema
+from api.schemas import LivroSchema, AllBooks
 from api.controllers import Controllers
 from api.api_settings import api
 from typing import List
@@ -8,7 +8,7 @@ def Jwt(request):
     token = Controllers.create_token_jwt()
     return {"token": token}
 
-@api.get('livros/', response=List[LivroSchema], tags=["Get"], description="Retorna um json com todos os livros cadastrados")
+@api.get('livros/', response=List[AllBooks], tags=["Get"], description="Retorna um json com todos os livros cadastrados")
 def livros(request):
     json_data = Controllers.get_all_books()
     return json_data
