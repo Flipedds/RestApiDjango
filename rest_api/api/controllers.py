@@ -29,4 +29,17 @@ class Controllers:
         book.delete()
         return {"msg": "Livro deletado"}
     
+    def update_book(id, livro):
+        dict = livro.dict()
+        print(dict['titulo'])
+        try:
+            book = Livro.objects.get(pk=id)
+            book.titulo = dict['titulo']
+            book.autor = dict['autor']
+            book.editora = dict['editora']
+            book.save()
+            return {"msg": "Livro atualizado com sucesso !"}
+        except Exception as err:
+            return {"msg": "Livro não encontrado / não foi possível Atualizar!"}
+    
     # todo update controller
