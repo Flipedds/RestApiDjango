@@ -28,3 +28,5 @@ class Controllers:
             
         book.delete()
         return {"msg": "Livro deletado"}
+    
+    # todo update controller
