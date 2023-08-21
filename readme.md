@@ -63,7 +63,7 @@
     CACHES = {
         "default": {
             "BACKEND": "django.core.cache.backends.redis.RedisCache",
-            "LOCATION": "rediss://red-cjd9f03bq8nc73ett8qg:UwAN9p5UqmRmHc9bri6soHfgeRrQhw4X@oregon-redis.render.com:6379",
+            "LOCATION": "",
         }
     }
 
