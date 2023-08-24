@@ -25,7 +25,7 @@ class GlobalAuth(HttpBearer):
 class InvalidToken(Exception):
     pass
 
-api = NinjaAPI(auth=GlobalAuth(), title="RestApi", description="A rest api with django-ninja")
+api = NinjaAPI(auth=GlobalAuth(), title="The book is on Api", description="A book rest api with django-ninja")
 
 @api.exception_handler(InvalidToken)
 def on_invalid_token(request, exc):
